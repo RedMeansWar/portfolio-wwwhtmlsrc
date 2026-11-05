@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Red | Developer Portfolio</title>
+  <meta name="description" content="Developer portfolio with live Discord status and a game of Snake.">
+  <meta name="color-scheme" content="light dark">
+
+  <!-- Apply saved theme before first paint to avoid a flash -->
+  <script>
+    try {
+      var t = localStorage.getItem("theme");
+      if (t === "light" || t === "dark") document.documentElement.dataset.theme = t;
+    } catch (e) { }
+  </script>
+
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+
+<body>
+  <!-- Decorative animated red waves (pure CSS/SVG, sits behind everything) -->
+  <div class="waves" aria-hidden="true">
+    <svg class="wave wave-back" viewBox="0 0 2880 200" preserveAspectRatio="none">
+      <path d="M0,100 C240,40 480,40 720,100 S1200,160 1440,100 S1920,40 2160,100 S2640,160 2880,100 V200 H0 Z" />
+    </svg>
+    <svg class="wave wave-front" viewBox="0 0 2880 200" preserveAspectRatio="none">
+      <path d="M0,100 C240,40 480,40 720,100 S1200,160 1440,100 S1920,40 2160,100 S2640,160 2880,100 V200 H0 Z" />
+    </svg>
+  </div>
+
+  <header class="site-header">
+    <a class="brand" href="#top">Red</a>
+    <nav aria-label="Main">
+      <a href="#projects">Projects</a>
+      <a href="#play">Play</a>
+      <a href="#contact">Contact</a>
+      <button id="theme-toggle" class="icon-btn" type="button" aria-label="Toggle color theme">Theme</button>
+    </nav>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="hero-text">
+        <p class="eyebrow">Developer</p>
+        <h1>Hi, I'm Red. I build things.</h1>
+        <p class="lead">
+          I'm a self-taught developer going to school for Computer Science so I can actually get a job in the field.
+          I know some languages like JavaScript, C#, TypeScript, Java, and C++. I also know some frameworks
+          like NestJS, Angular, and other things... I don't know what else to put here, so here is a random quote:
+          "The more you try to forget something, the more you remember it." - Haruki Murakami
+        </p>
+        <div class="cta">
+          <a class="btn primary" href="#projects">See my work</a>
+          <a class="btn" href="#play">Play Snake</a>
+        </div>
+      </div>
+
+      <!-- Live Discord presence -->
+      <aside class="card presence" aria-live="polite" aria-label="Discord status">
+        <div class="presence-top">
+          <div class="avatar-wrap">
+            <img id="avatar" class="avatar" alt="" width="64" height="64" hidden>
+            <span id="status-dot" class="status-dot offline" title="offline"></span>
+          </div>
+          <div>
+            <div id="display-name" class="presence-name">Loading…</div>
+            <div id="username" class="muted"></div>
+          </div>
+        </div>
+        <p id="status-text" class="muted">Connecting to Discord…</p>
+        <div id="activity" class="activity" hidden>
+          <img id="activity-img" class="activity-img" alt="" width="56" height="56" hidden>
+          <div class="activity-body">
+            <div id="activity-name" class="activity-name"></div>
+            <div id="activity-details" class="muted"></div>
+            <div id="activity-state" class="muted"></div>
+            <div id="activity-time" class="muted small"></div>
+            <div id="progress" class="progress" hidden role="progressbar" aria-label="Track progress" aria-valuemin="0"
+              aria-valuemax="100">
+              <div id="progress-bar" class="progress-bar"></div>
+            </div>
+          </div>
+        </div>
+      </aside>
+    </section>
+
+    <section id="projects" class="section">
+      <h2>Projects</h2>
+      <div id="project-grid" class="grid"></div>
+    </section>
+
+    <section id="play" class="section">
+      <h2>Take a break</h2>
+      <div class="card game">
+        <div class="game-bar">
+          <span>Score: <strong id="score">0</strong></span>
+          <span>Best: <strong id="best">0</strong></span>
+          <button id="start-btn" class="btn small" type="button">Start</button>
+        </div>
+        <canvas id="snake" width="400" height="400" tabindex="0"
+          aria-label="Snake game. Use arrow keys or WASD to move, space to pause."></canvas>
+        <p class="muted small">Arrow keys or WASD to move · Space to pause · Swipe on mobile</p>
+      </div>
+    </section>
+
+    <section id="contact" class="section">
+      <h2>Contact</h2>
+      <p>
+        <a href="https://github.com/RedMeansWar">GitHub</a> ·
+        <a href="mailto:red@redmeanswar.dev>Email</a> ·
+        Discord: <span id="contact-discord">redmeanswar</span>
+      </p>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <small>&copy; <span id="year"></span> RedMeansWar</small>
+  </footer>
+</body>
+
+</html>
