@@ -1,41 +1,42 @@
 "use strict";
 
-/* =========================================================
-   CONFIG: edit these
-   ========================================================= */
+// CONFIG
 const DISCORD_ID = "1016846998021873714";
 
 const PROJECTS = [
-  {
-    title: "Project One",
-    description: "One sentence on what it does and why it's interesting.",
-    tags: ["TypeScript", "NestJS"],
-    url: "https://github.com/your-username/project-one",
-  },
-  {
-    title: "Project Two",
-    description: "Another project. Mention the problem it solves.",
-    tags: ["C++", "Qt"],
-    url: "https://github.com/your-username/project-two",
-  },
-  {
-    title: "Project Three",
-    description: "A third one. Swap these out for your real work.",
-    tags: ["Java", "Fabric"],
-    url: "https://github.com/your-username/project-three",
-  },
+  // {
+  //   title: "Project One",
+  //   description: "One sentence on what it does and why it's interesting.",
+  //   tags: ["TypeScript", "NestJS"],
+  //   url: "https://github.com/your-username/project-one",
+  // },
+  // {
+  //   title: "Project Two",
+  //   description: "Another project. Mention the problem it solves.",
+  //   tags: ["C++", "Qt"],
+  //   url: "https://github.com/your-username/project-two",
+  // },
+  // {
+  //   title: "Project Three",
+  //   description: "A third one. Swap these out for your real work.",
+  //   tags: ["Java", "Fabric"],
+  //   url: "https://github.com/your-username/project-three",
+  // },
 ];
 
 // Live project feed from GitHub. Leave as the placeholder to use PROJECTS above.
 const GITHUB_USER = "RedMeansWar";
-const FEATURED_REPOS = ["JRPC", "DiscordBot-TypeScript-Template", "TempClean", "WinUtils"];// optional: ["repo-a", "repo-b"] to show specific repos
+const FEATURED_REPOS = [
+  "JRPC",
+  "DiscordBot-TypeScript-Template",
+  "TempClean",
+  "WinUtils",
+  "Tweeny",
+  "FiveM-Scripts"
+]; // optional: ["repo-a", "repo-b"] to show specific repos
 const MAX_REPOS = 6; // max number is 6 repositories
 
-/* =========================================================
-   Small helpers
-   ========================================================= */
 const $ = (id) => document.getElementById(id);
-
 // localStorage can throw (private mode, blocked storage), so wrap it.
 function storeGet(key) {
   try { return localStorage.getItem(key); } catch { return null; }
@@ -44,9 +45,6 @@ function storeSet(key, value) {
   try { localStorage.setItem(key, value); } catch { /* ignore */ }
 }
 
-/* =========================================================
-   Theme: prefers-color-scheme + manual override in localStorage
-   ========================================================= */
 const root = document.documentElement;
 const themeBtn = $("theme-toggle");
 const systemDark = window.matchMedia("(prefers-color-scheme: dark)");
@@ -76,9 +74,6 @@ systemDark.addEventListener("change", () => {
 });
 syncThemeButton();
 
-/* =========================================================
-   Projects
-   ========================================================= */
 async function fetchRepos() {
   const cacheKey = "ghRepos:" + GITHUB_USER;
 
@@ -159,10 +154,6 @@ function renderProjects(items) {
   }
 }
 
-/* =========================================================
-   Discord presence via Lanyard
-   REST for the first paint, then a WebSocket for live updates.
-   ========================================================= */
 const STATUS_LABEL = {
   online: "Online",
   idle: "Idle",
@@ -306,9 +297,7 @@ function connectPresenceSocket() {
   });
 }
 
-/* =========================================================
-   Snake
-   ========================================================= */
+// SNAKE? SNAKE? SNAKE! (a small game for fun)
 const canvas = $("snake");
 const ctx = canvas.getContext("2d");
 const GRID = 20;
@@ -372,7 +361,7 @@ function tick() {
   step();
   draw();
   if (state === "running") {
-    const delay = Math.max(60, 140 - score * 3); // speeds up as you eat
+    const delay = Math.max(60, 140 - score * 3); // speeds up as you eat. Yum.
     loopId = setTimeout(tick, delay);
   }
 }
@@ -495,9 +484,7 @@ startBtn.addEventListener("click", startGame);
 new MutationObserver(draw).observe(root, { attributes: true, attributeFilter: ["data-theme"] });
 systemDark.addEventListener("change", draw);
 
-/* =========================================================
-   Init
-   ========================================================= */
+// Okay we are done now.
 $("year").textContent = new Date().getFullYear();
 loadProjects();
 state = "idle";

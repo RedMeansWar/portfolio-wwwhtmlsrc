@@ -185,7 +185,7 @@ nav a:hover { color: var(--accent); }
 
 .site-footer { padding: 2rem 0; color: var(--muted); text-align: center; }
 
-/* I don't know if this will even be used :/ */
+/* ---------- Spotify progress bar ---------- */
 .progress { height: 4px; border-radius: 999px; background: var(--border); margin-top: .4rem; overflow: hidden; }
 .progress[hidden] { display: none; }
 .progress-bar { height: 100%; width: 0; background: #1db954; border-radius: inherit; transition: width 1s linear; }
@@ -198,24 +198,41 @@ nav a:hover { color: var(--accent); }
 .waves {
   position: fixed;
   left: 0; right: 0; bottom: 0;
-  height: 45vh;
+  height: 55vh;
   z-index: -1;
   overflow: hidden;
   pointer-events: none;
   /* fade the top edge so the waves blend into the page */
-  -webkit-mask-image: linear-gradient(to top, #000 40%, transparent);
-          mask-image: linear-gradient(to top, #000 40%, transparent);
+  -webkit-mask-image: linear-gradient(to top, #000 60%, transparent);
+          mask-image: linear-gradient(to top, #000 60%, transparent);
 }
 .wave {
   position: absolute;
   bottom: 0; left: 0;
   width: 200%;                 /* two wave periods; we slide by exactly one */
   height: 100%;
-  fill: var(--accent);
+  fill: url(#wave-grad);       /* bright red on top fading to deep crimson */
   animation: wave-slide 24s linear infinite;
 }
-.wave-back  { opacity: .10; animation-duration: 38s; animation-direction: reverse; }
-.wave-front { opacity: .16; height: 80%; }
+.wave-grad-top    { stop-color: var(--accent); }
+.wave-grad-bottom { stop-color: color-mix(in srgb, var(--accent) 55%, #3a0005); }
+
+/* Three layers at different heights, speeds and directions give a parallax feel */
+.wave-back  { opacity: .30; height: 100%; animation-duration: 42s; animation-direction: reverse; }
+.wave-mid   { opacity: .45; height: 78%;  animation-duration: 30s; animation-delay: -11s; }
+.wave-front { opacity: .70; height: 55%;  animation-duration: 20s; }
+
+/* Soft red glow behind the page so the background isn't flat */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  pointer-events: none;
+  background:
+    radial-gradient(60vmax 40vmax at 85% -10%, color-mix(in srgb, var(--accent) 22%, transparent), transparent 70%),
+    radial-gradient(50vmax 35vmax at 0% 110%, color-mix(in srgb, var(--accent) 18%, transparent), transparent 70%);
+}
 
 @keyframes wave-slide {
   from { transform: translateX(0); }
