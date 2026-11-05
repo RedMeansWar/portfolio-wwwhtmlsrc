@@ -28,7 +28,7 @@ const PROJECTS = [
 
 // Live project feed from GitHub. Leave as the placeholder to use PROJECTS above.
 const GITHUB_USER = "RedMeansWar";
-const FEATURED_REPOS = [];// optional: ["repo-a", "repo-b"] to show specific repos
+const FEATURED_REPOS = ["JRPC", "DiscordBot-TypeScript-Template", "TempClean", "WinUtils"];// optional: ["repo-a", "repo-b"] to show specific repos
 const MAX_REPOS = 6; // max number is 6 repositories
 
 /* =========================================================
